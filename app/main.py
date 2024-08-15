@@ -5,14 +5,21 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
 from app.routers import api
+from app.config import settings
 import uvicorn
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
-
+    # return {"message": "Hello World",
+    #         "APP_NAME": settings.APP_NAME,
+    #         "APP_VERSION": settings.APP_VERSION,}
+    return f"""
+    Hello World 
+    {settings.APP_NAME} 
+    {settings.APP_VERSION}
+    """
 app.include_router(api.api_router)
 
 

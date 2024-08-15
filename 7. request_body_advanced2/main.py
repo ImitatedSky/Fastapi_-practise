@@ -16,6 +16,7 @@ async def update_user(user:User):
     user_dict = user.model_dump()
     return user_dict
 
+# 加了*，代表後面的參數都是keyword-only 沒有順序上的問題
 @app.put("/users/{user_id}")
 async def update_user(*,user_id:int , user:User , count:int = Body(default = ...,gt=0 , examples=[9] )):
     result_dict = {
