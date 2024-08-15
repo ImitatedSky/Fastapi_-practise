@@ -1,0 +1,9 @@
+# Text Editor
+.vs/
+.vscode
+
+# file
+settings/
+
+# system
+settings.json
