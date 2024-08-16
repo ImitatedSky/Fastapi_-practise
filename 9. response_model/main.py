@@ -7,8 +7,8 @@ from enum import Enum
 
 '''
 response_model 用來檢查回傳的格式
-像下面 就不會回傳password...
-
+像下面 就不會回傳password. description 其他東西
+ 
 但x 因為少了
 '''
 
