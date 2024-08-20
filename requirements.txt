@@ -1,0 +1,6 @@
+fastapi == 0.112.0
+python-multipart == 0.0.9
+python-jose == 3.3.0
+uvicorn == 0.30.5
+virtualenv == 20.26.3
+sqlalchemy == 1.4.22
