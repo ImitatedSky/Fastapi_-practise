@@ -25,6 +25,6 @@ Fastapi_-practise
 
 ### sqlalchemy - alembic
 
-Alembic 來檢測 SQLAlchemy Model 的變更，生成對應的遷移文件。遷移文件描述如何在資料庫進行這些變更。
+Alembic 來檢測 SQLAlchemy Model 的變更，生成對應的遷移文件。(記得先到version看命令是否正確再進行下一步)
 
 最後:執行 Alembic 的遷移命令可變更ˋ在實際的資料庫結構中。這樣，資料庫才會同步到最新的 Model 結構。
