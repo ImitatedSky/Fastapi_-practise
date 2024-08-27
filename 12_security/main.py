@@ -14,7 +14,7 @@ from jose import JWTError , jwt
 
 SECURITY_KEY = "abcdef123456"
 ALGORITHM = "HS256"
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token") 
 
 class Token(BaseModel):
     # 回傳的資料
@@ -29,6 +29,7 @@ def validate_user(username:str , password:str):
     if username == "Pat" and password == "1234":
         return username
     return None
+
 def get_current_username(token:str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token , SECURITY_KEY , algorithms=[ALGORITHM])
@@ -51,6 +52,12 @@ def get_current_username(token:str = Depends(oauth2_scheme)):
 
 @app.post('/token' , response_model=Token)
 async def login(login_from:OAuth2PasswordRequestForm = Depends()):
+    """
+    用來取得token
+    輸入帳號密碼，如果正確就回傳token
+    user: Pat
+    password: 1234
+    """
     username = validate_user(login_from.username , login_from.password)
     
     if not username:
