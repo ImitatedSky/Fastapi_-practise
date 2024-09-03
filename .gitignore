@@ -8,3 +8,7 @@ settings/
 # system
 settings.json
 .env
+14_database_update_delete/base_modle.py
+14_database_update_delete/db.py
+14_database_update_delete/main.py
+14_database_update_delete/modle.py
