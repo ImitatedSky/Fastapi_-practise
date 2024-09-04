@@ -11,7 +11,7 @@ from datetime import datetime , timedelta , timezone
 from jose import JWTError , jwt
 
 from sqlalchemy import create_engine , Column , Integer , String, Select
-from sqlalchemy.orm import DeclarativeBase, sessionmaker, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, Mapped, mapped_column, Session
 
 app = FastAPI()
 

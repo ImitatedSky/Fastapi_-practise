@@ -11,7 +11,6 @@ from datetime import datetime , timedelta , timezone
 from jose import JWTError , jwt
 
 
-
 SECURITY_KEY = "abcdef123456"
 ALGORITHM = "HS256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token") 
@@ -47,7 +46,6 @@ def get_current_username(token:str = Depends(oauth2_scheme)):
             headers={"WWW-Authenticate":"Bearer"}
         )
     return username
-
 
 
 @app.post('/token' , response_model=Token)

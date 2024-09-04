@@ -14,6 +14,7 @@ class Base(DeclarativeBase):
     pass
 
 # 根據使用的DB，修改以下的連接字串
+# echo=True 會在執行時輸出SQL指令
 engine = create_engine("mysql+mysqldb://root:test@localhost/testdb", echo=True)
 
 # Define the database models 用於定義資料庫結構

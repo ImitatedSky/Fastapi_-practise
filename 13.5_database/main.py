@@ -4,8 +4,8 @@ import uvicorn
 
 from typing import List
 from sqlalchemy.orm import Session
-from .db import get_db
-from .modle import StudentEntity, StudentBase, StudentCreate, StudentOut
+from db import get_db
+from modle import StudentEntity, StudentBase, StudentCreate, StudentOut
 
 app = FastAPI()
 
