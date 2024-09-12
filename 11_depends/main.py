@@ -97,6 +97,8 @@ async def get_items_by_class2(page_info:PageInfo2 = Depends(PageInfo2)):
 
 
 
+
+
 if __name__ == "__main__":
     #bash   uvicorn main:app --reload
     uvicorn.run("main:app" , reload=True) 
