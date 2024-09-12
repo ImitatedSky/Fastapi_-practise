@@ -13,6 +13,8 @@ Fastapi_-practise
 
 主要是用於操作資料庫，對資料庫進行增刪改查
 
+在此修改alembic，可以直接進行資料庫修改
+
 
 
 ### Database - sqlalchemy
