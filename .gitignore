@@ -8,4 +8,8 @@ settings/
 # system
 settings.json
 .env
+.venv
 
+# files
+21_security2/
+test_files/
