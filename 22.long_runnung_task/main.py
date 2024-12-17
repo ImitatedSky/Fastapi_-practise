@@ -22,6 +22,14 @@ async def print_log(param: str):
         logging.info(f"current_time: {current_time}")
         await asyncio.sleep(0.5)  # 暫停0.5秒
     print("Task completed")
+
+async def print_number(param: str):
+    # 每秒數一次
+    for i in range(int(param)):
+        print(i)
+        await asyncio.sleep(1)
+    
+
     
 @app.post("/start-task/n")
 async def start_task(param: str, background_tasks: BackgroundTasks):
@@ -30,14 +38,15 @@ async def start_task(param: str, background_tasks: BackgroundTasks):
 
 
 @app.post("/start-task/")
-async def start_task(param: str, background_tasks: BackgroundTasks):
-    background_tasks.add_task(print_log, param)
+async def start_task(int_time: str, background_tasks: BackgroundTasks):
+    background_tasks.add_task(print_log, param = int_time)
     return {"message": "Task started in the background"}
 
 @app.post("/start-task/2")
-async def start_task(param: str, background_tasks: BackgroundTasks):
+async def start_task(int_time: str, background_tasks: BackgroundTasks):
     async def process( background_tasks: BackgroundTasks):
-        background_tasks.add_task(print_log, param)
+
+        background_tasks.add_task(print_log, param = int_time)
         print("process")
         return {"message": "in process"}
     
@@ -46,6 +55,18 @@ async def start_task(param: str, background_tasks: BackgroundTasks):
     return {"message": "Task started in the background"}
 
 
+@app.post("/start-task/3")
+async def start_task(int_time: str, count_number: int, background_tasks: BackgroundTasks):
+    async def process( background_tasks: BackgroundTasks):
+
+        background_tasks.add_task(print_log, param = int_time)
+        background_tasks.add_task(print_number, param = count_number)
+        print("process")
+        return {"message": "in process"}
+    
+    await process(background_tasks)
+
+    return {"message": "Task started in the background"}
 
 
 
