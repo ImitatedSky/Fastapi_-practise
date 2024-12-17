@@ -1,14 +1,17 @@
-import sys
 import os
+import sys
+
 # 不清楚為何跑的時候有時找不到app module，所以加了這一行
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI
-from app.routers import api
-from app.config import settings
 import uvicorn
+from fastapi import FastAPI
+
+from app.config import settings
+from app.routers import api
 
 app = FastAPI()
+
 
 @app.get("/")
 async def root():
@@ -20,11 +23,12 @@ async def root():
     {settings.APP_NAME} 
     {settings.APP_VERSION}
     """
-app.include_router(api.api_router)
 
+
+app.include_router(api.api_router)
 
 
 # 執行uvicorn用
 if __name__ == "__main__":
-    #bash   uvicorn main:app --reload
-    uvicorn.run("main:app" , reload=True) 
+    # bash   uvicorn main:app --reload
+    uvicorn.run("main:app", reload=True)

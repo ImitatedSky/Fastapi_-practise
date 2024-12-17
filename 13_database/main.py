@@ -1,17 +1,26 @@
-import uvicorn
-from fastapi import FastAPI , Depends
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel , Field 
-from typing import Optional , List , Union
+from typing import List, Optional, Union
 
-from sqlalchemy import create_engine , Column , Integer , String, Select
-from sqlalchemy.orm import DeclarativeBase, sessionmaker, Mapped, mapped_column, Session
+import uvicorn
+from fastapi import Depends, FastAPI
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+from sqlalchemy import Column, Integer, Select, String, create_engine
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    Session,
+    mapped_column,
+    sessionmaker,
+)
+
 
 class Base(DeclarativeBase):
     """
     Base class for all the models.
     """
+
     pass
+
 
 # 根據使用的DB，修改以下的連接字串
 # echo=True 會在執行時輸出SQL指令
@@ -23,15 +32,16 @@ class StudentEntity(Base):
     __tablename__ = "students"
 
     # Define the columns
-    id : Mapped[int] = mapped_column(Integer, primary_key=True)
-    name : Mapped[int] = mapped_column(String(128), nullable=False)
-    age : Mapped[int] = mapped_column(Integer, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[int] = mapped_column(String(128), nullable=False)
+    age: Mapped[int] = mapped_column(Integer, nullable=False)
 
     """ 
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
     age = Column(Integer, nullable=False)
     """
+
 
 Base.metadata.create_all(engine)
 SessionLocal = sessionmaker(bind=engine)
@@ -43,8 +53,10 @@ class StudentBase(BaseModel):
     name: str = Field(..., example="PC Pat")
     age: int
 
+
 class StudentCreate(StudentBase):
     ...
+
 
 class StudentOut(StudentBase):
     id: int = Field(..., example=1)
@@ -59,26 +71,25 @@ def get_db():
     finally:
         db.close()
 
+
 # router
 @app.get("/students", response_model=List[StudentOut])
-async def get_students(db : Session = Depends(get_db)):
+async def get_students(db: Session = Depends(get_db)):
     students = db.query(StudentEntity).all()
     return students
 
+
 @app.post("/students", response_model=StudentOut)
-async def create_student(student: StudentCreate, db : Session = Depends(get_db)):
-    student_entity = StudentEntity(
-        name=student.name,
-        age=student.age
-    )
+async def create_student(
+    student: StudentCreate, db: Session = Depends(get_db)
+):
+    student_entity = StudentEntity(name=student.name, age=student.age)
     db.add(student_entity)
     db.commit()
     db.refresh(student_entity)
-    
+
     return student_entity
 
 
-
 if __name__ == "__main__":
-    uvicorn.run( "main:app" , reload = True)
-
+    uvicorn.run("main:app", reload=True)

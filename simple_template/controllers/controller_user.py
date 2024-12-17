@@ -7,6 +7,6 @@ class UserController:
 
     def get_users(self) -> List[str]:
         return self.user_service.get_users()
-    
+
     def test_controller(self):
         return "test_controller"

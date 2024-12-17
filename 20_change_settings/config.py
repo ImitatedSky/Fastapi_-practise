@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 
+
 class Settings(BaseSettings):
     # 當config 和 .env都有的時候，會以.env為主
     APP_NAME: str = "fastapi-config"
@@ -8,6 +9,7 @@ class Settings(BaseSettings):
     API_KEY: str = "123456"
 
     class Config:
-        env_file = '.env'
+        env_file = ".env"
+
 
 settings = Settings()
